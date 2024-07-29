@@ -9,10 +9,11 @@ for ($i = 0; $i < count($array); $i++) {
     $simbolo = $array[$i];
     $topo = $pilha[count($pilha) - 1]; // pegar o topo da pilha sem removê-lo
     if ($simbolo == "a" && $topo == "Z0") {
+        // Se 'a' e o topo é 'Z0', adiciona 'XZ0'
         array_pop($pilha); // remove Z0
-        array_push($pilha, "Z0", "X"); // adiciona XZ0
+        array_push($pilha, "Z0", "X");
     } else if ($simbolo == "b" && $topo == "Z0") {
-        // Se 'b' e o topo é 'Z0', adiciona 'Y' e 'Z0'
+        // Se 'b' e o topo é 'Z0', adiciona 'YZ0'
         array_pop($pilha); // remove Z0
         array_push($pilha, "Z0", "Y");
     } else if ($simbolo == "a" && $topo == "X") {
@@ -20,7 +21,7 @@ for ($i = 0; $i < count($array); $i++) {
         array_pop($pilha); // remove X
         array_push($pilha, "X", "X");
     } else if ($simbolo == "b" && $topo == "X") {
-        // Se 'b' e o topo é 'X', adiciona 'YX'
+        // Se 'b' e o topo é 'X'
         array_pop($pilha); // remove X
     } else if ($simbolo == "b" && $topo == "Y") {
         // Se 'b' e o topo é 'Y', adiciona 'YY'
@@ -31,11 +32,12 @@ for ($i = 0; $i < count($array); $i++) {
         array_pop($pilha); // remove Y
     } else {
         // caso contrário, quebra o laço
+        $invalida = true;
         break;
     }
 }
 
-$valida = ($pilha[count($pilha) - 1] == "Z0") && (count($pilha) == 1);
+$valida = ($pilha[count($pilha) - 1] == "Z0") && !($invalida);
 
 header("location: index.php?cadeia=$cadeia&valida=$valida");
 ?>
